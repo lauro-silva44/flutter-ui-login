@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>110080492471-15nlr6o3d3jo7eut1o4mu79pmg1vhvji.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.110080492471-15nlr6o3d3jo7eut1o4mu79pmg1vhvji</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCFxALMLfty_UbzgYMHFEictf-Gw96kv8E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>110080492471</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.loginui</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-login-lauro</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-login-lauro.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:110080492471:ios:356f0cf5c8fa68af291e32</string>
+</dict>
+</plist>

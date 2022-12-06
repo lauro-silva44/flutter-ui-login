@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "110080492471",
+    "project_id": "flutter-login-lauro",
+    "storage_bucket": "flutter-login-lauro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110080492471:android:3d15f8b502c5d413291e32",
+        "android_client_info": {
+          "package_name": "com.example.loginui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110080492471-ngj3vhr9glqs9ob9l0dpieet3n1j9qnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgH_NiGCAMFCAcOYMuveAgDPM0KlaV8Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110080492471-ngj3vhr9glqs9ob9l0dpieet3n1j9qnt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
