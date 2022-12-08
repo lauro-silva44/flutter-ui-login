@@ -1,10 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loginui/home_page.dart';
-import 'package:loginui/login_page.dart';
-import 'package:loginui/main_page.dart';
+import 'package:loginui/auth/main_page.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {

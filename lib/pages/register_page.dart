@@ -1,24 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  final VoidCallback showRegisterPage;
+  const RegisterPage({super.key, required this.showRegisterPage});
+
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim());
-  }
+  final _confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
@@ -29,16 +26,33 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    //VARIABLES AREA
     Widget helloAgainText = Text(
-      'Hello Again!',
+      'Hello There!',
       style: GoogleFonts.bebasNeue(
         fontSize: 36,
       ),
     );
+    Future signUp() async {
+      try {
+        if (_passwordController.text.trim() ==
+            _confirmPasswordController.text.trim()) {
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim());
+        }
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
 
     Widget welcomeText = const Text(
-      'Welcome back, you\'ve been missed!',
+      'Register Below with your details',
       style: TextStyle(fontSize: 20),
     );
 
@@ -47,6 +61,10 @@ class _LoginPageState extends State<LoginPage> {
       child: TextField(
         controller: _emailController,
         decoration: InputDecoration(
+            icon: const Icon(
+              Icons.email_rounded,
+              color: Colors.deepPurple,
+            ),
             enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.circular(12)),
@@ -65,6 +83,10 @@ class _LoginPageState extends State<LoginPage> {
       child: TextField(
         controller: _passwordController,
         decoration: InputDecoration(
+            icon: const Icon(
+              Icons.password_rounded,
+              color: Colors.deepPurple,
+            ),
             enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.circular(12)),
@@ -78,18 +100,40 @@ class _LoginPageState extends State<LoginPage> {
         obscureText: true,
       ),
     );
+    Widget confirmPassField = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: TextField(
+        controller: _confirmPasswordController,
+        decoration: InputDecoration(
+            icon: const Icon(
+              Icons.enhanced_encryption_rounded,
+              color: Colors.deepPurple,
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(12)),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.deepPurple),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            hintText: 'Confirm Password',
+            fillColor: Colors.grey[200],
+            filled: true),
+        obscureText: true,
+      ),
+    );
 
     Widget signInButton = Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: GestureDetector(
-          onTap: signIn,
+          onTap: signUp,
           child: Container(
             padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
                 color: Colors.deepPurple,
                 borderRadius: BorderRadius.circular(12)),
             child: const Center(
-                child: Text('Sign In',
+                child: Text('Sign Up',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -97,8 +141,7 @@ class _LoginPageState extends State<LoginPage> {
           )),
     );
 
-    // ignore: no_leading_underscores_for_local_identifiers
-    Widget _makingSpace(double space) {
+    Widget makingSpace(double space) {
       return SizedBox(
         height: space,
       );
@@ -106,23 +149,26 @@ class _LoginPageState extends State<LoginPage> {
 
     Widget notMember = Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text('Not a member?',
+      children: [
+        const Text('I am a member',
             style: TextStyle(
               fontWeight: FontWeight.bold,
             )),
-        Text('Register now',
-            style: TextStyle(
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
-            )),
+        GestureDetector(
+          onTap: widget.showRegisterPage,
+          child: const Text(' Login now',
+              style: TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
       ],
     );
     Widget iconApp = const Icon(
       Icons.flutter_dash,
       size: 100,
     );
-//VARIABLES ABOVE
+
     return Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
@@ -131,21 +177,23 @@ class _LoginPageState extends State<LoginPage> {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               iconApp,
-              _makingSpace(25.0),
+              makingSpace(25.0),
               //Hello Again
               helloAgainText,
-              _makingSpace(10.0),
+              makingSpace(10.0),
               welcomeText,
-              _makingSpace(50.0),
+              makingSpace(50.0),
               //Email TextField
               emailTextField,
-              _makingSpace(10.0),
+              makingSpace(10.0),
               //Password TextField
               passwordField,
-              _makingSpace(10.0),
+              makingSpace(10.0),
+              confirmPassField,
+              makingSpace(10.0),
               //signIn button
               signInButton,
-              _makingSpace(10.0),
+              makingSpace(10.0),
               //register button
               notMember
             ]),

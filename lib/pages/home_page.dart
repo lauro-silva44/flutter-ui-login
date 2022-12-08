@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
-    void _signOut() {
+    void signOut() {
       FirebaseAuth.instance.signOut();
     }
 
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Sign in as: ${user.email!}'),
-          TextButton(onPressed: _signOut, child: const Text('Sign Out'))
+          TextButton(onPressed: signOut, child: const Text('Sign Out'))
         ],
       )),
     );
