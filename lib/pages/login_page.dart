@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginui/pages/forgot_pass_page.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -20,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim());
   }
-  
 
   @override
   void dispose() {
@@ -126,6 +126,26 @@ class _LoginPageState extends State<LoginPage> {
       Icons.flutter_dash,
       size: 100,
     );
+
+    Widget forgetPass = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          GestureDetector(
+            onTap: () => {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const ForgetPasswordPage();
+              }))
+            },
+            child: const Text(
+              'Forgot Password?',
+              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
 //VARIABLES ABOVE
     return Scaffold(
         backgroundColor: Colors.grey[300],
@@ -146,6 +166,8 @@ class _LoginPageState extends State<LoginPage> {
               makingSpace(10.0),
               //Password TextField
               passwordField,
+              makingSpace(10.0),
+              forgetPass,
               makingSpace(10.0),
               //signIn button
               signInButton,
